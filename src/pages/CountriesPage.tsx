@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { FilterBar } from "../components/FilterBar"
 import { CountryCard } from "../components/CountryCard";
+import { Header } from "../components/Header"
 import { Paginate } from "../components/Pagination";
 
 interface CountriesInterface {
@@ -30,6 +31,11 @@ export const CountriesPage: React.FC = () => {
 
         setCountries(res.data);
         setTotalItems(res.data.length)
+        const startIndex = (pageNum - 1) * 7;
+        const endIndex = startIndex + 7;
+        const slicedCountries = countries.slice(startIndex, endIndex);
+        setPageNum(pageNum);
+        setSelectedCountries(slicedCountries);
         if (res.data) {
             setLoaded(true);
             handlePageClick(1)
@@ -40,8 +46,8 @@ export const CountriesPage: React.FC = () => {
 
     const handlePageClick = (pageNum: number): void => {
         if (loaded) {
-            const startIndex = (pageNum - 1) * 10;
-            const endIndex = startIndex + 10;
+            const startIndex = (pageNum - 1) * 7;
+            const endIndex = startIndex + 7;
             const slicedCountries = countries.slice(startIndex, endIndex);
 
             setPageNum(pageNum);
@@ -62,8 +68,6 @@ export const CountriesPage: React.FC = () => {
             case "Ascending":
                 setSelectedCountries(countries.sort((a, b) => a.name.localeCompare(b.name)))
                 console.log(query)
-
-
                 break;
 
             case "Descending":
@@ -73,6 +77,8 @@ export const CountriesPage: React.FC = () => {
                 break;
 
             case "smaller than lithuania":
+                setSelectedCountries(countries.filter(country => country.area < lithuaniaArea))
+            break
             case "Region":
                 setSelectedCountries(countries.filter(country => country.region === region));
                 break;
@@ -98,13 +104,14 @@ export const CountriesPage: React.FC = () => {
 
 
     return <>
+         <Header/>
         <FilterBar filterHandler={handleFilter} />
         <div className="countries">
             {
                 loaded && selectedCountries.map((country, index) => <CountryCard key={index} details={country} />)
             }
         </div>
-        {loaded && <Paginate itemsPerPage={10} totalItems={countries.length} handleClick={handlePageClick} />
+        {loaded && <Paginate itemsPerPage={7} totalItems={countries.length} handleClick={handlePageClick} />
         }    </>
 }
 

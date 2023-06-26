@@ -1,69 +1,96 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+* {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  max-width: 1453px;
+  width: 100vw;
   min-height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 12%;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-areas: "nav" "filters" "countries" "pagination";
+  place-items: center;
+  gap: 1rem;
+  grid-template-rows: 8% 5% 20%, 5%;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+nav {
+  grid-area: nav;
+  width: 100%;
+  padding: 0.5em 2em;
+}
+
+.filter {
+  grid-area: filters;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  position: relative;
+  gap: 3rem;
+}
+
+.filter .filter-sort {
+  width: 28%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+
+.filter .filter-sort select:hover {
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.filter .filter-bysize:hover {
+  cursor: pointer;
 }
+
+.filter .filter-byregion {
+  height: 1.5rem;
+  padding: 0.2rem;
+  overflow: hidden;
+}
+
+.filter .filter-byregion:hover {
+  cursor: pointer;
+}
+
+.countries {
+  width: 100%;
+  min-height: 450px;
+  grid-area: countries;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+.pagination {
+  width: 100%;
+  grid-area: pagination;
+}
+.pagination ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  list-style: none;
+  gap: 1.5rem;
+}
+.pagination ul:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=index.css.map */

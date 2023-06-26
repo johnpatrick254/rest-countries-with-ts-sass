@@ -1,5 +1,5 @@
 interface CountryProps{
-    details:{name:string;region:string;area_size:number}
+    details:{name:string;region:string;area:number}
 }
 
 export const CountryCard :React.FC <CountryProps> =({details})=>{
@@ -12,7 +12,7 @@ export const CountryCard :React.FC <CountryProps> =({details})=>{
                 <p>Region: {details.region}</p>
             </div>
             <div className="country-card-region">
-                <p>Size: {details.area_size}</p>
+                <p>Size: {details.area}</p>
             </div>
         </div>
     </>

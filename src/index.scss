@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root{
+ max-width: 1453px;
+ width:100vw;
+ min-height: 100vh;
+ display: flex;
+ flex-flow: column nowrap;
+ justify-content: center;
+ align-items: center;
+ padding: 2% 12%;
+}
+
+.container{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    "nav"
+    "filters"
+    "countries"
+    "pagination"
+    ;
+    place-items: center;
+    gap: 1rem;
+    grid-template-rows: 8% 5%  20%, 5%;
+}
+
+nav{
+    grid-area: nav;
+    width: 100%;
+    padding: 0.5em 2em; 
+}
+
+.filter {
+    grid-area: filters;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    position: relative;
+    gap: 3rem;
+  }
+  .filter .filter-sort {
+    width: 28%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+  .filter .filter-sort select:hover {
+    cursor: pointer;
+  }
+  .filter .filter-bysize:hover {
+    cursor: pointer;
+  }
+  .filter .filter-byregion {
+    height: 1.5rem;
+    padding: 0.2rem;
+    overflow: hidden;
+  }
+  .filter .filter-byregion:hover {
+    cursor: pointer;
+  }
+
+.countries{
+    width: 100%;
+    min-height: 400px;
+    grid-area: countries;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+}
+
+.pagination{
+    width: 100%;
+    grid-area: pagination;
+    
+
+    ul{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        list-style: none;
+        gap:1.5rem;
+        
+        &:hover{
+            cursor: pointer;
+        }
+
+    }
+
+}

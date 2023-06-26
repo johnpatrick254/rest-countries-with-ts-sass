@@ -1,10 +1,15 @@
-import './App.css'
+import { CountriesPage } from "./pages/CountriesPage"
+import './index.css'
 
 function App() {
 
-  return  <>
-    </>
-  
+  return (
+    <div className="container">
+      
+      <CountriesPage/>
+
+    </div>
+  )
 }
 
 export default App
