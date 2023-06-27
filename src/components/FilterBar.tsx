@@ -23,8 +23,8 @@ export const FilterBar: React.FC<FilterProps> = ({ filterHandler }) => {
                 <FilterListIcon />
                 <label htmlFor="sort-by-letter">{sortAscending ? "A-Z":"Z-A"}</label>
                 <select onChange={
-                    (e: React.ChangeEvent) => {
-                        filterHandler(e.target.value!);
+                    (e: React.ChangeEvent<HTMLSelectElement>) => {
+                        filterHandler(e.target.value);
                         setSortAscending(!sortAscending);
                     }
                 } name="sort-by-letter" >
