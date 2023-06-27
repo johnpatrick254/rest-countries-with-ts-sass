@@ -4,7 +4,7 @@ import { FilterBar } from "../components/FilterBar";
 import { CountryCard } from "../components/CountryCard";
 import { Header } from "../components/Header";
 import { Paginate } from "../components/Pagination";
-import {dummydata} from "./dummydata"
+import { dummydata } from "./dummydata"
 
 interface CountriesInterface {
   name: string;
@@ -22,17 +22,17 @@ export const CountriesPage: React.FC = () => {
   const [totalItems, setTotalItems] = useState<number>(0);
   const lithuaniaArea = 65300;
 
-  const handlePageClick = (pageNum: number): void => {
+  const handlePageClick = (pageNumber: number): void => {
 
     if (selectedCountries.length === 0) console.log("empty");
-    setPageNum(pageNum);
-    const startIndex = (pageNum - 1) * 5;
+    setPageNum(pageNumber);
+    const startIndex = (pageNumber - 1) * 5;
     const endIndex = startIndex + 5;
     const slicedCountries = filteredCountries.slice(startIndex, endIndex);
     setSelectedCountries(slicedCountries);
     setTotalItems(filteredCountries.length);
-    console.log("page set on:", pageNum);
-    console.log("selected countries:", slicedCountries);
+    // console.log("page set on:", pageNum);
+    // console.log("selected countries:", slicedCountries);
   };
 
   const handleFilter = (query: string | number, region?: string): void => {
@@ -55,13 +55,16 @@ export const CountriesPage: React.FC = () => {
         break;
 
       case "smaller than lithuania":
-        console.log("selected countries before filter :", totalItems);
+        console.log("selected countries before filter :", filteredCountries.length);
         setFilteredCountries(
           countries.filter((country) => country.area < lithuaniaArea)
         );
         setTotalItems(filteredCountries.length)
-        handlePageClick(1);
-        console.log("selected countries after filter :", totalItems);
+        setTimeout(() => {
+          handlePageClick(1);
+
+        }, 0);
+        console.log("selected countries after filter :", filteredCountries.length);
 
         break;
       case "Region":
@@ -97,7 +100,7 @@ export const CountriesPage: React.FC = () => {
       const slicedCountries = res.data.slice(startIndex, endIndex);
       setSelectedCountries(slicedCountries);
       setLoaded(true);
-      console.log("initial data set",slicedCountries);
+      console.log("initial data set:", slicedCountries);
     });
   };
 
@@ -110,6 +113,12 @@ export const CountriesPage: React.FC = () => {
 
 
   }, []);
+
+  useEffect((): void => {
+    handlePageClick(pageNum);
+    console.log("effect called")
+
+  }, [selectedCountries, totalItems]);
 
   return (
     <>
