@@ -119,7 +119,7 @@ export const CountriesPage: React.FC = () => {
 
   useEffect((): void => {
     handlePageClick(pageNum);
-  }, [filteredCountries.length]);
+  }, [filteredCountries.length,totalItems]);
 
   return (
     <>
