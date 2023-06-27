@@ -1,99 +1,207 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
-#root{
- max-width: 1453px;
- width:100vw;
- min-height: 100vh;
- display: flex;
- flex-flow: column nowrap;
- justify-content: center;
- align-items: center;
- padding: 2% 12%;
+html{
+  scroll-behavior: smooth;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.container{
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-areas: 
+#root {
+  max-width: 1453px;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 2% 12%;
+  overflow: auto;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-areas:
     "nav"
     "filters"
     "countries"
-    "pagination"
-    ;
-    place-items: center;
-    gap: 1rem;
-    grid-template-rows: 8% 5%  20%, 5%;
+    "pagination";
+  place-items: center;
+  row-gap: 2.5rem;
+  grid-template-rows: 8% 5% 20%, 5%;
 }
 
-nav{
-    grid-area: nav;
-    width: 100%;
-    padding: 0.5em 2em; 
+nav {
+  grid-area: nav;
+  width: 100%;
+  padding: 0.5em 2em;
 }
 
 .filter {
-    grid-area: filters;
-    width: 100%;
-    height: 100%;
+  grid-area: filters;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  position: relative;
+  gap: 3rem;
+  
+  button {
+    transition: all 400ms ease-in-out;
+    position: absolute;
+    left: 85%;
+    font-size: 1rem;
+    background-color: inherit;
+    padding: 0.5em 0.8em;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    &:hover{
+      border-color:#808080;
+      cursor: pointer;
+    }
+  }
+
+  .filter-sort {
+    width: 22%;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    position: relative;
-    gap: 3rem;
-  }
-  .filter .filter-sort {
-    width: 28%;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    padding: 0.5rem;
+    padding: 0.5em 0.8em;
+    border: 2px solid black;
     gap: 1rem;
-  }
-  .filter .filter-sort select:hover {
-    cursor: pointer;
-  }
-  .filter .filter-bysize:hover {
-    cursor: pointer;
-  }
-  .filter .filter-byregion {
-    height: 1.5rem;
-    padding: 0.2rem;
-    overflow: hidden;
-  }
-  .filter .filter-byregion:hover {
-    cursor: pointer;
-  }
 
-.countries{
-    width: 100%;
-    min-height: 400px;
-    grid-area: countries;
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 1rem;
-}
-
-.pagination{
-    width: 100%;
-    grid-area: pagination;
-    
-
-    ul{
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: flex-start;
-        list-style: none;
-        gap:1.5rem;
-        
-        &:hover{
-            cursor: pointer;
-        }
-
+    select{
+      border: none;
+      padding: 0.4em 0.3em;
+      background-color: inherit;
+      
+      option{
+        background-color: #242424;
+      }
     }
 
+    select:hover {
+      cursor: pointer;
+    }
+  }
+  .filter-bysize {
+    transition: all 400ms ease-in-out;
+    border: 1px solid black;
+     border-radius: 5px;
+     padding: 0.5em 0.8em;
+
+    &:hover {
+      cursor: pointer;
+      border-color: #808080;
+    }
+  }
+
+  .filter-byregion {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.5rem;
+    position: absolute;
+    left: 60%;
+    top:6%;
+    height: 2.5em;
+    align-items: center;
+    padding: 0.5em 0.8em;
+    border: 2px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: all 400ms ease-in-out;
+    &:hover {
+      cursor: pointer;
+      border-color: #808080 ;
+    }
+    .filter-byregion_title {
+      display: flex;
+
+      .MuiSvgIcon-root {
+        border-radius: 50%;
+        position: relative;
+        left: 0.5rem;
+        bottom: 0.2rem;
+      }
+    }
+    .filter-byregion_value {
+      &:hover {
+        border-bottom: 2px solid #808080;
+        margin-bottom: -1px;
+      }
+    }
+  }
+  .showregion {
+    transition: all 400ms ease-in-out;
+    height: max-content !important;
+  }
+}
+
+.countries {
+  width: 100%;
+  min-height: 400px;
+  grid-area: countries;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+.pagination {
+  width: 100%;
+  min-height: 231px;
+  grid-area: pagination;
+
+  ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    width: fit-content;
+    list-style: none;
+    padding: 0.5em 1em;
+    border-radius: 6px;
+    gap: 1.5rem;
+    outline: 2px solid #808080;
+
+    &:hover {
+      cursor: pointer;
+    }
+    li {
+      padding: 0.5em;
+    }
+  }
+}
+
+.currentpage {
+  outline: 4px solid rgb(190, 186, 186);
+  border-radius: 3px;
+  animation: animateNum 100ms ease-in-out;
+
+  @keyframes animateNum {
+    0% {
+      transform: translateY(20%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 }

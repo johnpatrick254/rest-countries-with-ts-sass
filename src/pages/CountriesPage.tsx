@@ -4,20 +4,19 @@ import { FilterBar } from "../components/FilterBar";
 import { CountryCard } from "../components/CountryCard";
 import { Header } from "../components/Header";
 import { Paginate } from "../components/Pagination";
+import {dummydata} from "./dummydata"
 
 interface CountriesInterface {
   name: string;
   region: string;
-  area: 272967.0;
-  independent: string;
+  area: number;
+  independent: boolean;
 }
 
 export const CountriesPage: React.FC = () => {
   const [countries, setCountries] = useState<CountriesInterface[]>([]);
   const [filteredCountries, setFilteredCountries] = useState<CountriesInterface[]>([]);
-  const [selectedCountries, setSelectedCountries] = useState<
-    CountriesInterface[]
-  >([]);
+  const [selectedCountries, setSelectedCountries] = useState<CountriesInterface[]>(dummydata);
   const [loaded, setLoaded] = useState<boolean>(false);
   const [pageNum, setPageNum] = useState<number>(1);
   const [totalItems, setTotalItems] = useState<number>(0);
@@ -27,8 +26,8 @@ export const CountriesPage: React.FC = () => {
 
     if (selectedCountries.length === 0) console.log("empty");
     setPageNum(pageNum);
-    const startIndex = (pageNum - 1) * 7;
-    const endIndex = startIndex + 7;
+    const startIndex = (pageNum - 1) * 5;
+    const endIndex = startIndex + 5;
     const slicedCountries = filteredCountries.slice(startIndex, endIndex);
     setSelectedCountries(slicedCountries);
     setTotalItems(filteredCountries.length);
@@ -93,12 +92,12 @@ export const CountriesPage: React.FC = () => {
       setCountries(res.data);
       setFilteredCountries(res.data);
       setTotalItems(filteredCountries.length);
-      const startIndex = (pageNum - 1) * 7;
-      const endIndex = startIndex + 7;
+      const startIndex = 0
+      const endIndex = 5;
       const slicedCountries = res.data.slice(startIndex, endIndex);
       setSelectedCountries(slicedCountries);
       setLoaded(true);
-      console.log("initial data set");
+      console.log("initial data set",slicedCountries);
     });
   };
 
@@ -118,12 +117,12 @@ export const CountriesPage: React.FC = () => {
       <FilterBar filterHandler={handleFilter} />
       <div className="countries">
         {selectedCountries.map((country, index) => (
-          <CountryCard key={index} details={country} />
+          <CountryCard loading={loaded} key={index} details={country} />
         ))}
       </div>
       {loaded && (
         <Paginate
-          itemsPerPage={7}
+          itemsPerPage={5}
           totalItems={filteredCountries.length}
           handleClick={handlePageClick}
           currentPage={pageNum}

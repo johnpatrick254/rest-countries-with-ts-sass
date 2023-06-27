@@ -1,18 +1,25 @@
+import Skeleton from '@mui/material/Skeleton';
+
 interface CountryProps{
-    details:{name:string;region:string;area:number}
+    details:{name:string;region:string;area:number};
+    loading:boolean;
 }
 
-export const CountryCard :React.FC <CountryProps> =({details})=>{
+export const CountryCard :React.FC <CountryProps> =({details,loading})=>{
     return <>
         <div className="country-card">
-            <div className="country-card-name">
-                <p>Name: {details.name}</p>
+        <div className="country-card-name">
+                {!loading ? <Skeleton  animation="wave" variant="text" sx={{ fontSize: '2rem', width:'10rem'}} />
+                    : <h2>{details.name}</h2>}
             </div>
             <div className="country-card-size">
-                <p>Region: {details.region}</p>
+                {!loading ? <Skeleton animation="wave" variant="text" sx={{ fontSize: '1rem', width:'6rem' }} />
+                    : <p>Region: {details.region}</p>}
             </div>
             <div className="country-card-region">
-                <p>Size: {details.area}</p>
+                {!loading ? <Skeleton animation="wave" variant="text" sx={{ fontSize: '1rem', width:'6rem' }} />
+                    : <p>Size: {details.region}</p>}
+
             </div>
         </div>
     </>
