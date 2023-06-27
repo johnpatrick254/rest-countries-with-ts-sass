@@ -1,15 +1,15 @@
 import { CountriesPage } from "./pages/CountriesPage"
+import { Analytics } from '@vercel/analytics/react';
 import './index.css'
 
 function App() {
 
-  return (
+  return <>
     <div className="container">
-      
-      <CountriesPage/>
-
+      <CountriesPage />
     </div>
-  )
+    <Analytics />
+  </>
 }
 
 export default App
