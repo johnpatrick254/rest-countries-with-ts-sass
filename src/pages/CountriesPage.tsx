@@ -28,11 +28,9 @@ export const CountriesPage: React.FC = () => {
     setPageNum(pageNumber);
     const startIndex = (pageNumber - 1) * 5;
     const endIndex = startIndex + 5;
-    const slicedCountries = filteredCountries.slice(startIndex, endIndex);
+    const slicedCountries = filteredCountries.filter((_country, index) => index >= startIndex && index < endIndex);
     setSelectedCountries(slicedCountries);
     setTotalItems(filteredCountries.length);
-    // console.log("page set on:", pageNum);
-    // console.log("selected countries:", slicedCountries);
   };
 
   const handleFilter = (query: string | number, region?: string): void => {
@@ -55,23 +53,28 @@ export const CountriesPage: React.FC = () => {
         break;
 
       case "smaller than lithuania":
-        console.log("selected countries before filter :", filteredCountries.length);
-        setFilteredCountries(
-          countries.filter((country) => country.area < lithuaniaArea)
-        );
-        setTotalItems(filteredCountries.length)
-        setTimeout(() => {
-          handlePageClick(1);
-
-        }, 0);
-        console.log("selected countries after filter :", filteredCountries.length);
-
+        {
+          setFilteredCountries(
+            countries.filter((country) => country.area < lithuaniaArea)
+          );
+          setTotalItems(filteredCountries.length)
+          const startIndex = 0;
+          const endIndex = 5;
+          const slicedCountries = filteredCountries.filter((_country, index) => index >= startIndex && index < endIndex);
+          setSelectedCountries(slicedCountries);
+        }
         break;
       case "Region":
-        setFilteredCountries(
-          countries.filter((country) => country.region === region)
-        );
-        setTotalItems(filteredCountries.length);
+        {
+          setFilteredCountries(
+            countries.filter((country) => country.region === region)
+          );
+          setTotalItems(filteredCountries.length);
+          const startIndex = 0;
+          const endIndex = 5;
+          const slicedCountries = filteredCountries.filter((_country, index) => index >= startIndex && index < endIndex);
+          setSelectedCountries(slicedCountries);
+        }
         handlePageClick(1);
 
         break;
@@ -116,9 +119,7 @@ export const CountriesPage: React.FC = () => {
 
   useEffect((): void => {
     handlePageClick(pageNum);
-    console.log("effect called")
-
-  }, [selectedCountries, totalItems]);
+  }, [filteredCountries.length]);
 
   return (
     <>
