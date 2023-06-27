@@ -18,7 +18,7 @@ export const CountryCard :React.FC <CountryProps> =({details,loading})=>{
             </div>
             <div className="country-card-region">
                 {!loading ? <Skeleton animation="wave" variant="text" sx={{ fontSize: '1rem', width:'6rem' }} />
-                    : <p>Size: {details.region}</p>}
+                    : <p>Size: {details.area}</p>}
 
             </div>
         </div>
