@@ -52,11 +52,12 @@ export const FilterBar:React.FC <FilterProps> = ({filterHandler})=>{
             }} className="filter-byregion_value">
             <p>Oceania</p>
            </div>
-            <button onClick={()=>{
+        </div>
+        <button onClick={()=>{
                 filterHandler('Reset');
             }}>Reset Filters</button>
-        </div>
       </div>
     </>
 
 }
+
