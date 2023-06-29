@@ -8,7 +8,6 @@ interface FilterProps {
 
 export const FilterBar: React.FC<FilterProps> = ({ filterHandler }) => {
     const [showRegions, setShowRegions] = useState<boolean>(false)
-    const [sortAscending, setSortAscending] = useState<boolean>(true)
     const styles = {
 
         largeIcon: {
@@ -21,11 +20,9 @@ export const FilterBar: React.FC<FilterProps> = ({ filterHandler }) => {
         <div className="filter">
             <div className="filter-sort">
                 <FilterListIcon />
-                <label htmlFor="sort-by-letter">{sortAscending ? "A-Z":"Z-A"}</label>
                 <select onChange={
                     (e: React.ChangeEvent<HTMLSelectElement>) => {
                         filterHandler(e.target.value);
-                        setSortAscending(!sortAscending);
                     }
                 } name="sort-by-letter" >
                     <option value="Ascending">Ascending</option>

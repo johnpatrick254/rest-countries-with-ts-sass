@@ -55,15 +55,12 @@ nav {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  position: relative;
+  flex-flow: row wrap;
   gap: 3rem;
 }
 .filter button {
+  height: 2.5rem;
   transition: all 400ms ease-in-out;
-  position: absolute;
-  left: 85%;
   font-size: 1rem;
   background-color: inherit;
   padding: 0.5em 0.8em;
@@ -75,13 +72,19 @@ nav {
   cursor: pointer;
 }
 .filter .filter-sort {
-  width: 22%;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  height: 2.5rem;
   padding: 0.5em 0.8em;
+  transition: all 400ms ease-in-out;
   border: 2px solid black;
+  border-radius: 5px;
   gap: 1rem;
+}
+.filter .filter-sort:hover {
+  cursor: pointer;
+  border-color: #808080;
 }
 .filter .filter-sort select {
   border: none;
@@ -95,6 +98,7 @@ nav {
   cursor: pointer;
 }
 .filter .filter-bysize {
+  height: 2.5rem;
   transition: all 400ms ease-in-out;
   border: 1px solid black;
   border-radius: 5px;
@@ -106,11 +110,10 @@ nav {
 }
 .filter .filter-byregion {
   display: flex;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
   flex-flow: column nowrap;
   gap: 0.5rem;
-  position: absolute;
-  left: 60%;
-  top: 6%;
   height: 2.5em;
   align-items: center;
   padding: 0.5em 0.8em;
@@ -118,6 +121,31 @@ nav {
   border-radius: 5px;
   overflow: hidden;
   transition: all 400ms ease-in-out;
+  /* Large devices (laptops/desktops, 992px and up) */
+}
+@media only screen and (min-width: 768px) {
+  .filter .filter-byregion {
+    position: absolute;
+    left: 78%;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .filter .filter-byregion {
+    position: absolute;
+    left: 72%;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .filter .filter-byregion {
+    position: absolute;
+    left: 60%;
+  }
+}
+@media only screen and (min-width: 1300px) {
+  .filter .filter-byregion {
+    position: absolute;
+    left: 50%;
+  }
 }
 .filter .filter-byregion:hover {
   cursor: pointer;
@@ -138,8 +166,7 @@ nav {
 }
 .filter .showregion {
   transition: all 400ms ease-in-out;
-  height: -moz-max-content !important;
-  height: max-content !important;
+  height: 13.2rem !important;
 }
 
 .countries {
